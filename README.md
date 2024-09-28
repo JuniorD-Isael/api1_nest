@@ -1,85 +1,85 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+```markdown
+# API 1 - Sistema de Reconhecimento de Marca de Cerveja
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Esta é a API em Nest.js que faz parte do sistema de reconhecimento de marca de cerveja a partir de imagens de latas. Ela recebe as imagens enviadas pelo usuário, processa-as e se comunica com a API de OCR para identificar a marca da cerveja.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Estrutura do Projeto
 
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
-
-```bash
-$ npm install
+```
+src/
+├── app.controller.ts
+├── app.module.ts
+├── app.service.ts
+├── upload/
+│   ├── upload.controller.ts
+│   ├── upload.module.ts
+│   └── upload.service.ts
+└── uploads/
 ```
 
-## Compile and run the project
+## Pré-requisitos
+
+- Node.js
+- Nest.js
+- Multer para gerenciamento de uploads de arquivos
+- Dependências do projeto (verifique o `package.json`)
+
+## Instalação
+
+1. Clone o repositório:
+   ```bash
+   git clone <URL do repositório>
+   cd api1_nest
+   ```
+
+2. Instale as dependências:
+   ```bash
+   npm install
+   ```
+
+3. Crie um diretório para armazenar os uploads:
+   ```bash
+   mkdir src/uploads
+   ```
+
+## Uso
+
+Para iniciar a API, use o seguinte comando:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm run start
 ```
 
-## Run tests
+A API estará disponível em `http://localhost:3000`.
+
+### Endpoint
+
+#### `POST /upload`
+
+Este endpoint permite o upload de uma imagem no formato `multipart/form-data`. O campo do arquivo deve ser chamado `image`.
+
+##### Exemplo de requisição
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+curl -X POST http://localhost:3000/upload -F "image=@caminho/para/sua/imagem.jpg"
 ```
 
-## Resources
+##### Resposta
 
-Check out a few resources that may come in handy when working with NestJS:
+- **Status 200**: Retorna um objeto com o nome da marca identificada.
+- **Status 400**: Retorna uma mensagem de erro se nenhum arquivo for enviado ou se o formato do arquivo não for suportado.
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+## Tecnologias Utilizadas
 
-## Support
+- [Nest.js](https://nestjs.com/)
+- [Multer](https://github.com/expressjs/multer) para gerenciamento de uploads
+- TypeScript
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Contribuição
 
-## Stay in touch
+Contribuições são bem-vindas! Se você tiver sugestões ou melhorias, sinta-se à vontade para abrir uma issue ou enviar um pull request.
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Licença
 
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Este projeto está licenciado sob a [MIT License](LICENSE).
+```
