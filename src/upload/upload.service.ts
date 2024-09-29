@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Log } from '../logs/logs.entity';
+import { Log } from '../record/record.entity';
 import { Repository } from 'typeorm';
 import * as FormData from 'form-data';
 import * as fs from 'node:fs';
