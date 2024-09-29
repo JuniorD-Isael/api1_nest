@@ -8,7 +8,7 @@ import * as fs from 'node:fs';
 
 @Injectable()
 export class UploadService {
-  private readonly api2Url = 'http://127.0.0.1:8000/process-image'; // URL da API 2
+  private readonly api2Url = 'http://api2:8000/process-image'; // URL da API 2
 
   constructor(@InjectRepository(Log) private logRepository: Repository<Log>) {}
 
