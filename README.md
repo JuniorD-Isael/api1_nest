@@ -1,4 +1,3 @@
-```markdown
 # API 1 - Sistema de Reconhecimento de Marca de Cerveja
 
 Esta é a API em Nest.js que faz parte do sistema de reconhecimento de marca de cerveja a partir de imagens de latas. Ela recebe as imagens enviadas pelo usuário, processa-as e se comunica com a API de OCR para identificar a marca da cerveja.
@@ -23,12 +22,13 @@ src/
 - Nest.js
 - Multer para gerenciamento de uploads de arquivos
 - Dependências do projeto (verifique o `package.json`)
+- API 2 (Deve estar em execução; você pode encontrá-la [aqui](https://github.com/JuniorD-Isael/api2_python)) 
 
 ## Instalação
 
 1. Clone o repositório:
    ```bash
-   git clone <URL do repositório>
+   git clone https://github.com/JuniorD-Isael/api1_nest
    cd api1_nest
    ```
 
@@ -52,34 +52,25 @@ npm run start
 
 A API estará disponível em `http://localhost:3000`.
 
-### Endpoint
+## Endpoint
 
-#### `POST /upload`
+### POST /upload
 
 Este endpoint permite o upload de uma imagem no formato `multipart/form-data`. O campo do arquivo deve ser chamado `image`.
 
-##### Exemplo de requisição
+**Exemplo de requisição:**
 
 ```bash
 curl -X POST http://localhost:3000/upload -F "image=@caminho/para/sua/imagem.jpg"
 ```
 
-##### Resposta
+**Respostas:**
 
 - **Status 200**: Retorna um objeto com o nome da marca identificada.
 - **Status 400**: Retorna uma mensagem de erro se nenhum arquivo for enviado ou se o formato do arquivo não for suportado.
 
 ## Tecnologias Utilizadas
 
-- [Nest.js](https://nestjs.com/)
-- [Multer](https://github.com/expressjs/multer) para gerenciamento de uploads
-- TypeScript
-
-## Contribuição
-
-Contribuições são bem-vindas! Se você tiver sugestões ou melhorias, sinta-se à vontade para abrir uma issue ou enviar um pull request.
-
-## Licença
-
-Este projeto está licenciado sob a [MIT License](LICENSE).
-```
+- **Nest.js**: Framework para construção de aplicações Node.js.
+- **Multer**: Middleware para gerenciamento de uploads de arquivos.
+- **TypeScript**: Superconjunto de JavaScript que traz tipagem estática.
