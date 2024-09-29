@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  api1:
+    build:
+      context: ../api1-nest # Caminho para o repositório da API1
+    container_name: api1_nest
+    ports:
+      - '3000:3000'
+    depends_on:
+      - api2
+    environment:
+      - NODE_ENV=production
+
+  api2:
+    build:
+      context: ../api2-python # Caminho para o repositório da API2
+    container_name: api2_python
+    ports:
+      - '8000:8000'
+    environment:
+      - PYTHONUNBUFFERED=1
