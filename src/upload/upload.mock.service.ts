@@ -1,13 +1,27 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Log } from 'src/logs/logs.entity';
 import { Express } from 'express';
 
 @Injectable()
 export class MockUploadService {
-  // Simula a chamada para a API de OCR
-  handleFileUpload(file: Express.Multer.File) {
-    return {
+  constructor(@InjectRepository(Log) private logRepository: Repository<Log>) {}
+
+  async handleFileUpload(file: Express.Multer.File) {
+    const mockBrandName = 'Marca Fictícia'; // Simulação de marca
+
+    // Cria um novo log com as informações da consulta
+    const newLog = this.logRepository.create({
       filename: file.filename,
-      brand: 'Marca Fictícia', // Retorna um nome de marca fictício
-    };
+      brand: mockBrandName,
+      created_at: new Date(),
+      imagePath: file.path, // Assumindo que você armazena o caminho da imagem
+    });
+
+    // Salva o log no banco de dados
+    await this.logRepository.save(newLog);
+
+    return newLog; // Retorna o log criado
   }
 }

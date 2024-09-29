@@ -1,27 +1,52 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
-import { Express } from 'express';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Log } from '../logs/logs.entity';
+import { Repository } from 'typeorm';
+import * as FormData from 'form-data';
+import * as fs from 'node:fs';
 
 @Injectable()
 export class UploadService {
-  private readonly api2Url = ''; // Adicione a URL da API 2
+  private readonly api2Url = 'http://127.0.0.1:8000/process-image'; // URL da API 2
+
+  constructor(@InjectRepository(Log) private logRepository: Repository<Log>) {}
 
   async handleFileUpload(file: Express.Multer.File) {
     try {
-      // Vamos enviar a imagem para a API 2
-      const response = await axios.post(this.api2Url, file.buffer, {
+      // Envia a imagem para a API 2
+      const formData = new FormData();
+      formData.append('file', fs.createReadStream(file.path), {
+        filename: file.originalname,
+        contentType: file.mimetype,
+      });
+
+      const response = await axios.post(this.api2Url, formData, {
         headers: {
-          'Content-Type': file.mimetype,
+          ...formData.getHeaders(),
         },
       });
 
       // Nome da marca da cerveja contida na resposta da API 2
       const brandName = response.data.brandName;
 
-      return {
-        message: 'File uploaded successfully',
+      if (!brandName || brandName.trim().length === 0) {
+        return {
+          message:
+            'Nenhum texto dectectado na imagem. Nada foi salvo no banco de dados.',
+        };
+      }
+
+      const newLog = this.logRepository.create({
+        filename: file.filename,
         brand: brandName,
-      };
+        created_at: new Date(),
+        imagePath: file.path,
+      });
+
+      await this.logRepository.save(newLog);
+
+      return newLog;
     } catch (error) {
       throw new Error(`Erro no processamento da imagem: ${error.message}`);
     }
