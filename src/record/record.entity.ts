@@ -11,9 +11,10 @@ export class Log {
   @Column()
   brand: string;
 
-  @Column({ type: 'datetime' })
+  @Column({ type: 'timestamp' })
   created_at: Date;
 
   @Column()
   imagePath: string;
 }
+ 
