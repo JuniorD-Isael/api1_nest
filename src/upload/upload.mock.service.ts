@@ -16,12 +16,11 @@ export class MockUploadService {
       filename: file.filename,
       brand: mockBrandName,
       created_at: new Date(),
-      imagePath: file.path, // Assumindo que você armazena o caminho da imagem
+      imagePath: file.path,
     });
 
-    // Salva o log no banco de dados
     await this.logRepository.save(newLog);
 
-    return newLog; // Retorna o log criado
+    return newLog;
   }
 }
