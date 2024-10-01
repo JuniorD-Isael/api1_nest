@@ -8,6 +8,6 @@ import { Log } from './record.entity';
   imports: [TypeOrmModule.forFeature([Log])],
   providers: [RecordService],
   controllers: [RecordController],
-  exports: [TypeOrmModule], // Adicione esta linha
+  exports: [TypeOrmModule],
 })
 export class RecordModule {}

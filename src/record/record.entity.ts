@@ -17,4 +17,3 @@ export class Log {
   @Column()
   imagePath: string;
 }
- 

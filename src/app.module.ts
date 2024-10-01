@@ -3,14 +3,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UploadModule } from './upload/upload.module';
-import { RecordModule } from './record/record.module'; // Certifique-se de importar o RecordModule
+import { RecordModule } from './record/record.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'postgres',
-      port: 5432, 
+      port: 5432,
       username: 'user',
       password: 'password',
       database: 'cervejas',
