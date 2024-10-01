@@ -8,12 +8,16 @@ import { RecordModule } from './record/record.module'; // Certifique-se de impor
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'sqlite', // ou o tipo de banco de dados que você está usando
-      database: 'database.sqlite', // caminho do banco de dados
-      entities: [__dirname + '/**/*.entity{.ts,.js}'], // localização das entidades
-      synchronize: true, // deve ser usado apenas em desenvolvimento
+      type: 'postgres',
+      host: 'postgres',
+      port: 5432, 
+      username: 'user',
+      password: 'password',
+      database: 'cervejas',
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      synchronize: true,
     }),
-    RecordModule, // Adicione o RecordModule
+    RecordModule,
     UploadModule,
   ],
   controllers: [AppController],
